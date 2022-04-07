@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-import '../data/model/card.dart';
 
 abstract class QuantityState extends Equatable {
   const QuantityState(this.quantity);

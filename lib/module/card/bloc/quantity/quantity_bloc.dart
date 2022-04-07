@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:sample_store/module/card/quantity_bloc/quantity_event.dart';
-import 'package:sample_store/module/card/quantity_bloc/quantity_state.dart';
+import 'package:sample_store/module/card/bloc/quantity/quantity_event.dart';
+import 'package:sample_store/module/card/bloc/quantity/quantity_state.dart';
+
+
 class QuantityBloc extends Bloc<QuantityEvent, QuantityState> {
   QuantityBloc({required this.max , required this.quantity, }) : super( const QuantityMin(quantity:0)) {
     on<LoadQuantity>(_onStarted);

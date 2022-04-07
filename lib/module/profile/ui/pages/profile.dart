@@ -45,24 +45,25 @@ class _ProfileViewState extends State<ProfileView> {
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
 
             Text(
               'Name: ' + state.profileModel.name.toString(),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Text(
               'Email: ' + state.profileModel.email.toString(),
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            Spacer(),
+            const Spacer(),
             Align(
               alignment: Alignment.center,
               child: Container(
-                padding: EdgeInsets.all(10),
+                width:MediaQuery.of(context).size.width -10,
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
 
                     color: AppColors.primaryColor,

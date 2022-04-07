@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import '../data/model/card.dart';
-import '../data/repository/repository.dart';
+import '../../data/model/card.dart';
+import '../../data/repository/repository.dart';
 import 'card_event.dart';
 import 'card_state.dart';
 

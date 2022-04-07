@@ -4,6 +4,7 @@ import 'package:sample_store/core/widget/textfield.dart';
 import 'package:sample_store/module/login/data/authentication_Api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import '../../../core/thems/colors.dart';
 
 class LoginView extends StatefulWidget {
    const LoginView({Key? key}) : super(key: key);
@@ -30,15 +31,36 @@ class _LoginViewState extends State<LoginView> {
             const SizedBox(height: 20,),
              AppTextField(password: true,controller: passwordController,),
             const Spacer(),
-            ElevatedButton(onPressed: () async {
-              Map response=json.decode(await authenticationRepository.login(emailController.text,passwordController.text));
-              if(response.containsKey('message')){
-                _scaffoldKey.currentState?.showSnackBar( SnackBar(content: Text(response['message'].toString())));
-              }else{
-                (await SharedPreferences.getInstance()).setString(AppString.token, response['token']);
-                Navigator.pushNamed(context, '/');
-              }
-            }, child:const Text('Login')),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 10,
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: AppColors.primaryColor,
+                    border: Border.all(color: AppColors.iconColor, width: 1),
+                    borderRadius: BorderRadius.circular(10)),
+                child: InkWell(
+                  onTap:() async {
+                    Map response=json.decode(await authenticationRepository.login(emailController.text,passwordController.text));
+                    if(response.containsKey('message')){
+                      _scaffoldKey.currentState?.showSnackBar( SnackBar(content: Text(response['message'].toString())));
+                    }else{
+                      (await SharedPreferences.getInstance()).setString(AppString.token, response['token']);
+                      Navigator.pushNamed(context, '/');
+                    }
+                  },
+                  child: const Text(
+                    'Login',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
             const Spacer(flex: 3,),
 
           ],
