@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:sample_store/core/string.dart';
+import 'package:sample_store/core/widget/textfield.dart';
+import 'package:sample_store/module/login/data/authentication_Api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
+class LoginView extends StatefulWidget {
+   const LoginView({Key? key}) : super(key: key);
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  AuthenticationRepository authenticationRepository=AuthenticationRepository();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  TextEditingController emailController=TextEditingController();
+  TextEditingController passwordController=TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(flex: 4,),
+             AppTextField(controller: emailController,),
+            const SizedBox(height: 20,),
+             AppTextField(password: true,controller: passwordController,),
+            const Spacer(),
+            ElevatedButton(onPressed: () async {
+              Map response=json.decode(await authenticationRepository.login(emailController.text,passwordController.text));
+              if(response.containsKey('message')){
+                _scaffoldKey.currentState?.showSnackBar( SnackBar(content: Text(response['message'].toString())));
+              }else{
+                (await SharedPreferences.getInstance()).setString(AppString.token, response['token']);
+                Navigator.pushNamed(context, '/');
+              }
+            }, child:const Text('Login')),
+            const Spacer(flex: 3,),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
