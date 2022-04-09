@@ -45,15 +45,18 @@ class _DashboardViewState extends State<DashboardView>
             title: getTitle(state.tabIndex),
           ),
           body: SafeArea(
-            child: TabBarView(
-                dragStartBehavior: DragStartBehavior.down,
-                controller: TabIndexBloc.control..index = state.tabIndex,
-                children: const [
-                  ProductView(),
-                  CategoryView(),
-                  ProfileView(),
-                  CartView(),
-                ]),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: TabBarView(
+                  dragStartBehavior: DragStartBehavior.down,
+                  controller: TabIndexBloc.control..index = state.tabIndex,
+                  children: const [
+                    ProductView(),
+                    CategoryView(),
+                    ProfileView(),
+                    CartView(),
+                  ]),
+            ),
           ),
           bottomNavigationBar: Container(
               decoration: BoxDecoration(
