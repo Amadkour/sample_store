@@ -17,6 +17,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   void _onStarted(CartStarted event, Emitter<CartState> emit) async {
     try {
       final items = await _cartRepository.loadCartItems();
+      ///----------load items
       emit(CartLoaded(cart: Cart(items: [...items])));
     } catch (_) {
       emit(CartError());
@@ -28,6 +29,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     if (state is CartLoaded) {
       try {
         _cartRepository.addItemToCart(event.item);
+        ///----------insert item
         emit(CartLoaded(cart: Cart(items: [...state.cart.items, event.item])));
       } catch (_) {
         emit(CartError());
@@ -43,6 +45,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         emit(
           CartLoaded(
             cart: Cart(
+              ///----------remove item
               items: [...state.cart.items]..remove(event.item),
             ),
           ),

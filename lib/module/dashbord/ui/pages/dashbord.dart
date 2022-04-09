@@ -25,9 +25,7 @@ class _DashboardViewState extends State<DashboardView>
     with TickerProviderStateMixin {
   @override
   void initState() {
-    TabIndexBloc.control =
-        TabController(initialIndex: 0, length: 4, vsync: this);
-
+    TabIndexBloc.control = TabController(initialIndex: 0, length: 4, vsync: this);
     super.initState();
   }
 
@@ -66,6 +64,7 @@ class _DashboardViewState extends State<DashboardView>
                   ),
                 ],
               ),
+              ///---------bottom navigator
               child: BottomNavigationBar(
                   unselectedItemColor: Colors.black,
                   selectedItemColor: Colors.redAccent,
@@ -146,7 +145,7 @@ class _DashboardViewState extends State<DashboardView>
       }),
     );
   }
-
+///-------------tab Appbar title
   String getTitle(int tabIndex) {
     switch (tabIndex) {
       case 0:

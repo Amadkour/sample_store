@@ -32,12 +32,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        debugShowCheckedModeBanner: false,
-        home: MultiBlocProvider(
+    return MultiBlocProvider(
             providers: [
               BlocProvider(
                 create: (_) =>
@@ -69,13 +64,12 @@ class MyApp extends StatelessWidget {
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Flutter Bloc Shopping Cart',
               initialRoute: type ? '/' : '/login',
               routes: {
                 '/': (_) => const DashboardView(),
                 '/login': (_) => const LoginView(),
               },
-            )));
+            ));
   }
 }
   getType()  async {type=(await SharedPreferences.getInstance()).containsKey(AppString.token);}

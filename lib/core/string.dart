@@ -1,8 +1,9 @@
-class AppString{
+abstract class AppString{
   static String baseURL='https://elgomhouria.vps.webdock.io/api/';
+  ///---------authentication key
   static String token='token';
 }
-class AppPagesTitle{
+abstract class AppPagesTitle{
   static String profile='Profile';
   static String card='Card';
   static String category='Category';

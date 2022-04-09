@@ -7,12 +7,9 @@ abstract class ProductState extends Equatable {
   List<dynamic> get props => [];
 }
 
-class ProductLoadingState extends ProductState {
-
-}
+class ProductLoadingState extends ProductState {}
 
 class ProductSuccessState extends ProductState {
-
   final List<ProductModel> productModels;
 
   ProductSuccessState({required this.productModels});
@@ -23,7 +20,6 @@ class ProductSuccessState extends ProductState {
 }
 
 class ProductFailState extends ProductState {
-
   final String message;
 
   ProductFailState({required this.message});

@@ -1,7 +1,5 @@
 
 import 'dart:async';
-import 'package:sample_store/module/card/data/model/card.dart';
-
 import '../../../product/data/model/ProductModel.dart';
 
 class CartRepository  {

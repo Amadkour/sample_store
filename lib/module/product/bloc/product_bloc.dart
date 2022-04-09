@@ -14,11 +14,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       yield ProductLoadingState();
       try {
         List< ProductModel> productModel;
+
+        ///------------get data from category's products if pass category Id
         if(event.categoryId!=null){
           productModel = await productRepository!.getProductCategory(event.categoryId);
         }else{
-           productModel = await productRepository!.getProductData();
-
+          ///------------get data from products if not pass category Id
+          productModel = await productRepository!.getProductData();
         }
         yield ProductSuccessState( productModels: productModel);
       } catch (e) {

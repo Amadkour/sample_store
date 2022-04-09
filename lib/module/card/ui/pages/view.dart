@@ -42,6 +42,7 @@ class CartList extends StatelessWidget {
         if (state is CartLoading) {
           return const CircularProgressIndicator();
         }
+        ///------------cart list
         if (state is CartLoaded) {
           return ListView.separated(
             itemCount: state.cart.items.length,
@@ -96,6 +97,8 @@ class CartTotal extends StatelessWidget {
             if (state is CartLoading) {
               return const CircularProgressIndicator();
             }
+            ///------------total payments
+
             if (state is CartLoaded) {
               return Text('Total Payment: ${state.cart.totalPrice} L.E',
                   style: Theme.of(context)
@@ -106,6 +109,7 @@ class CartTotal extends StatelessWidget {
             return const Text('Something went wrong!');
           }),
           const SizedBox(height: 16),
+          ///------------buy button
           Align(
             alignment: Alignment.center,
             child: Container(

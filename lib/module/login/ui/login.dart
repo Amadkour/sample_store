@@ -7,16 +7,24 @@ import 'dart:convert';
 import '../../../core/thems/colors.dart';
 
 class LoginView extends StatefulWidget {
-   const LoginView({Key? key}) : super(key: key);
+  const LoginView({Key? key}) : super(key: key);
+
   @override
   State<LoginView> createState() => _LoginViewState();
 }
 
 class _LoginViewState extends State<LoginView> {
-  AuthenticationRepository authenticationRepository=AuthenticationRepository();
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  TextEditingController emailController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
+  ///----------get instance of authentication repository
+  AuthenticationRepository authenticationRepository =
+      AuthenticationRepository();
+
+  ///----------scaffold key to show snackbar
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  ///--------textfield controllers
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +34,22 @@ class _LoginViewState extends State<LoginView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacer(flex: 4,),
-             AppTextField(controller: emailController,),
-            const SizedBox(height: 20,),
-             AppTextField(password: true,controller: passwordController,),
+            const Spacer(
+              flex: 4,
+            ),
+            AppTextField(
+              controller: emailController,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            AppTextField(
+              password: true,
+              controller: passwordController,
+            ),
             const Spacer(),
+
+            ///----------login button
             Align(
               alignment: Alignment.center,
               child: Container(
@@ -41,13 +60,23 @@ class _LoginViewState extends State<LoginView> {
                     border: Border.all(color: AppColors.iconColor, width: 1),
                     borderRadius: BorderRadius.circular(10)),
                 child: InkWell(
-                  onTap:() async {
-                    Map response=json.decode(await authenticationRepository.login(emailController.text,passwordController.text));
-                    if(response.containsKey('message')){
-                      _scaffoldKey.currentState?.showSnackBar( SnackBar(content: Text(response['message'].toString())));
-                    }else{
-                      (await SharedPreferences.getInstance()).setString(AppString.token, response['token']);
-                      Navigator.pushNamed(context, '/');
+                  onTap: () async {
+                    try {
+                      Map response = json.decode(
+                          await authenticationRepository.login(
+                              emailController.text, passwordController.text));
+                      if (response.containsKey('message')) {
+                        _scaffoldKey.currentState?.showSnackBar(SnackBar(
+                            content: Text(response['message'].toString())));
+                      } else {
+                        (await SharedPreferences.getInstance())
+                            .setString(AppString.token, response['token']);
+                        Navigator.pushNamed(context, '/');
+                      }
+                    } catch (_) {
+                      _scaffoldKey.currentState?.showSnackBar(const SnackBar(
+                          content:
+                              Text('Please Enter Correct Email/Password')));
                     }
                   },
                   child: const Text(
@@ -61,8 +90,9 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ),
-            const Spacer(flex: 3,),
-
+            const Spacer(
+              flex: 3,
+            ),
           ],
         ),
       ),
