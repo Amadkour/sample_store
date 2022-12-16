@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sample_store/core/thems/colors.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({Key? key, this.password = false, this.controller})
@@ -18,7 +16,7 @@ class AppTextField extends StatelessWidget {
         Text(
           password ? 'Password' : 'Email',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: AppColors.iconColor, fontSize: 14),
+          // style: TextStyle(color: AppColors.iconColor, fontSize: 14),
         ),
         const SizedBox(
           height: 7,
@@ -43,8 +41,8 @@ class AppTextField extends StatelessWidget {
             errorStyle: const TextStyle(fontSize: 14, fontFamily: 'SemiBold'),
             isDense: false,
             hintText: password ? 'Enter Your Password' : 'Enter Your Email',
-            hintStyle: TextStyle(
-              color: AppColors.iconColor,
+            hintStyle: const TextStyle(
+              // color: AppColors.iconColor,
               fontSize: 16,
             ),
             border: const OutlineInputBorder(

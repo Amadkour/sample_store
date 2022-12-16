@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sample_store/core/thems/colors.dart';
 
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
-  final String title;
-  final Color backgroundColor;
+  final String? title;
+  final Color? backgroundColor;
   final bool hasBackButton;
   final Widget? widget;
   final Color backIconColor;
@@ -15,12 +14,12 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppbar(
       {Key? key,
       this.backIconColor = const Color(0xff20926B),
-      required this.title,
-       this.backgroundColor=Colors.transparent,
+      this.title,
+      this.backgroundColor,
       this.systemOverlayStyle = SystemUiOverlayStyle.dark,
       this.hasBackButton = true,
       this.widget})
-      : preferredSize = const Size.fromHeight(kToolbarHeight),
+      : preferredSize = const Size.fromHeight(80),
         super(key: key);
 
   @override
@@ -30,16 +29,19 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
 class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      elevation: 0.0,
-      centerTitle: true,
-      systemOverlayStyle: widget.systemOverlayStyle,
-      title:
-          Text(
-            widget.title,
-            style:  TextStyle(fontSize: 23,color: AppColors.iconColor),
-          ),
-      backgroundColor: widget.backgroundColor,
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Container(
+        decoration: BoxDecoration(
+            color: widget.backgroundColor ?? Theme.of(context).primaryColor,
+            image: DecorationImage(
+                image: Image.asset('assets/images/appbar.png').image, fit: BoxFit.cover)),
+        child: widget.widget ??
+            Text(
+              widget.title ?? '',
+              style: TextStyle(fontSize: 23, color: Theme.of(context).primaryColor),
+            ),
+      ),
     );
   }
 }
