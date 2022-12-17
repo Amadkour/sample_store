@@ -6,7 +6,7 @@ import '../parent/parent_validator.dart';
   String? Function(String?)? getValidation() {
     return qValidator(
       [
-        StartsWith('05'),
+        StartsWith(r'05', errorMessage('phone_greater'),),
         IsRequired(
           errorMessage('phone_empty'),
         ),

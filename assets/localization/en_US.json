@@ -37,8 +37,31 @@
   "Matches Guide": "Matches Guide",
   "about": "About",
   "last_news": "Last News",
-  "al-ahly": "al-Ahly"
+  "al-ahly": "al-Ahly",
+  "accept" : null,
+  "contact_us_screen": "Contact US",
 
+  "phone_empty": "Please enter your phone number",
+  "phone_greater": "Your phone number should  be greater than 10 digits and start by 05",
+  "password_empty": "Please enter your password",
+  "password_greater": "Your password should  be greater than 6 digits",
+  "new_password_empty": "Please enter your new password",
+  "password_not_match" :"Password Not Match",
+  "name_empty": "Enter your correct name please",
+  "id_empty": "Enter your correct Id please",
+  "id_greater" : "Your Id should  be 10 digits",
+  "birth_empty" : "Enter your BirthDate please",
+  "email_empty" : "Enter your correct Email please",
+  "email_greater": "Please enter the email correctly",
 
-
+  "order_number": "Order Number",
+  "send_success": "Send Success",
+  "message_title": "Message Title",
+  "first_name": "First Name",
+  "message_type": "Message Type",
+  "message_content": "Message Content",
+  "upload_image": "Upload Image",
+  "second_name": "Second Name",
+  "send": "Send",
+  "continue": "Continue"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:sample_store/core/res/theme/colors.dart';
 import 'package:sample_store/core/widget/base_page.dart';
 import 'package:sample_store/core/widget/text_field/design/child/email_text_field.dart';
 import 'package:sample_store/core/widget/text_field/design/child/phone_text_field.dart';
@@ -32,11 +33,23 @@ class SuccessScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('send_success'),
-                    Text(orderNumber),
+                    Text(
+                      tr('send_success'),
+                      style: const TextStyle(
+                        fontSize: 22,
+                        color: darkGrey,
+                      ),
+                    ),
+                    Text(
+                      '${tr('order_number')}: $orderNumber',
+                      style: const TextStyle(
+                        fontSize: 17,
+                        color: grey,
+                      ),
+                    ),
                     const Icon(
                       CupertinoIcons.checkmark_alt_circle,
-                      size: 100,
+                      size: 106,
                       color: Colors.green,
                     )
                   ],

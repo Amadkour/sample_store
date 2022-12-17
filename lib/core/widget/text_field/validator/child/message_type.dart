@@ -30,7 +30,6 @@ class MessageType extends StatelessWidget {
                 tr(value),
                 style: const TextStyle(
                     fontSize: 16,
-                    fontFamily: 'Poppins',
                     fontWeight: FontWeight.w400,
                     color: Colors.grey),
               ),

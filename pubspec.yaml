@@ -28,7 +28,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   queen_validators:
   image_picker: ^0.8.6
-
+  shared_preferences:
 
 
 dev_dependencies:

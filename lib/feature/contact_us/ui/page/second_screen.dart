@@ -16,7 +16,7 @@ import '../../../../core/widget/text_field/validator/child/message_type.dart';
 import '../../bloc/contact_us_bloc.dart';
 
 class ContactUsSecond extends StatelessWidget {
-  const ContactUsSecond(
+  ContactUsSecond(
       {Key? key,
       required this.firstName,
       required this.lastName,
@@ -27,6 +27,7 @@ class ContactUsSecond extends StatelessWidget {
   final String lastName;
   final String phone;
   final String email;
+  final GlobalKey<FormState> keyValidation = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +41,12 @@ class ContactUsSecond extends StatelessWidget {
               builder: (context, state) {
                 ContactUsBloc controller = context.read<ContactUsBloc>();
                 return Form(
+                  key: keyValidation,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        tr('contact_us'),
+                        tr('contact_us_screen'),
                         style: const TextStyle(color: Color(0xff0F1737), fontSize: 22),
                       ),
                       const SizedBox(
@@ -63,7 +65,9 @@ class ContactUsSecond extends StatelessWidget {
                         selectedItem: controller.messageType,
                         onChange: controller.onChangeType,
                       ),
-
+                      const SizedBox(
+                        height: 20,
+                      ),
                       ContentTextField(
                         contentController: controller.messageContentController,
                         focusNode: controller.messageContentFocus,
@@ -78,21 +82,22 @@ class ContactUsSecond extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-
-                      state is MessageSending?
-                      const Center(
-                        child: CircularProgressIndicator(),
-                      ):
-                      MyButtonNotProgress(
-                        onPressed: () async {
-                          await controller.onConfirm(context,
-                              firstName: firstName, lastName: lastName, email: email, phone: phone);
-                          // print(m);
-                          // pushNewScreen(context, screen: ContactUsFirst(), withNavBar: false);
-                        },
-                        text: 'Continue',
-                      )
-
+                      state is MessageSending
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : MyButtonNotProgress(
+                              onPressed: () async {
+                                if (keyValidation.currentState!.validate()) {
+                                  await controller.onConfirm(context,
+                                      firstName: firstName,
+                                      lastName: lastName,
+                                      email: email,
+                                      phone: phone);
+                                }
+                              },
+                              text: tr('send'),
+                            )
                     ],
                   ),
                 );

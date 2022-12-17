@@ -49,10 +49,7 @@ class MoreRepo {
           ),
           tab: 'groups',
           color: Colors.blue),
-      TabModel(
-          content: const ContactUsFirst(),
-          tab: 'contact_us',
-          color: Colors.white),
+      TabModel(content: ContactUsFirst(), tab: 'contact_us', color: Colors.white),
       TabModel(
           content: Column(
             mainAxisAlignment: MainAxisAlignment.center,

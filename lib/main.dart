@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -10,7 +12,14 @@ GlobalKey globalKey = GlobalKey();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting();
-  runApp(const MyApp());
+  /// run normal app or network error
+    ///----------------lang must be not null
+
+    if (await readKey('lang') as String == '') {
+      await writeKey('lang', Platform.localeName.split('_').first);
+    }
+    lang=await readKey('lang');
+    runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

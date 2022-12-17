@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sample_store/core/res/theme/colors.dart';
 
+import '../../../../global_bloc/app_bloc.dart';
+
 class ImageWidget extends StatelessWidget {
   const ImageWidget({Key? key, required this.onChange, this.file}) : super(key: key);
   final XFile? file;
@@ -23,7 +25,7 @@ class ImageWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [Expanded(
             child: Text(
-              file?.path??'upload_image'
+              file?.path??tr('upload_image')
             ),
           ),
           IconButton(onPressed: onChange, icon: const Icon(
