@@ -23,20 +23,22 @@ class NewsCard extends StatelessWidget {
             flex: 1,
             child: Stack(
               children: [
-                Positioned(child: MyImage(
-                  url: newsItem.image,
+                Positioned(
+                  child: MyImage(
+                    url: newsItem.image,
+                    width: 130,
+                    height: 94,
+                    boarderRadius: 9,
+                  ),
+                ),
+                const Positioned(child: MyImage(
+                  url: 'assets/images/logo2.png',
                   width: 50,
                   height: 50,
                   boarderRadius: 9,
                 ),
+                bottom:0 ,right: 0,),
 
-                bottom:0 ,),
-                MyImage(
-                  url: newsItem.image,
-                  width: 130,
-                  height: 94,
-                  boarderRadius: 9,
-                ),
               ],
             ),
           ),

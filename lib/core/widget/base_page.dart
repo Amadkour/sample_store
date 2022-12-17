@@ -16,14 +16,14 @@ class MainScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(
       builder: (context, state) {
-        return Scaffold(
-          backgroundColor:  Theme.of(context).primaryColor,
-          appBar:appBarWidget!=null? CustomAppbar(
-            widget:appBarWidget ,
-          ):null,
-          body: Directionality(
-            textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
-            child: scaffold,
+        return Directionality(
+          textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+          child: Scaffold(
+            backgroundColor:  Theme.of(context).primaryColor,
+            appBar:appBarWidget!=null? CustomAppbar(
+              widget:appBarWidget ,
+            ):null,
+            body: scaffold,
           ),
         );
       },

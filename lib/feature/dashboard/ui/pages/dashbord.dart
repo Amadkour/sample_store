@@ -53,7 +53,7 @@ class DashboardPage extends StatelessWidget {
                                                   BorderSide(color: selectedHeaderTab, width: 2)))
                                       : null,
                                   child: Text(
-                                    controller.headerTabs[index].tab,
+                                    tr(controller.headerTabs[index].tab),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

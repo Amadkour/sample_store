@@ -13,30 +13,33 @@ class CentrePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: BlocProvider(
-        create: (context) => CentreBloc(),
-        child: BlocBuilder<CentreBloc, CentreState>(
-          builder: (context, state) {
-            CentreBloc controller = context.read<CentreBloc>();
-            return state is CentreNewsLoaded
-                ? state.news.fold((l) => Text(l.errorMessage), (r) {
-                    return LoadMore(
-                      whenEmptyLoad: false,
-                      isFinish: !state.enablePullUp,
-                      onLoadMore: () async {
-                        await Future.delayed(Duration(seconds: 0, milliseconds: 100));
-                        controller.add(CentreNewsLoadNext(state.pageNumber));
-                        return true;
-                      },
-                      child: NewsView(r),
+
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BlocProvider(
+          create: (context) => CentreBloc(),
+          child: BlocBuilder<CentreBloc, CentreState>(
+            builder: (context, state) {
+              CentreBloc controller = context.read<CentreBloc>();
+              return state is CentreNewsLoaded
+                  ? state.news.fold((l) => Text(l.errorMessage), (r) {
+                      return LoadMore(
+                        isFinish: !state.enablePullUp,
+                        onLoadMore: () async {
+                          await Future.delayed(const Duration(seconds: 0, milliseconds: 100));
+                          controller.add(CentreNewsLoadNext(state.pageNumber));
+                          return true;
+                        },
+                        child: NewsView(r),
+                      );
+                    })
+                  : const Center(
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
                     );
-                  })
-                : const Center(
-                    child: CircularProgressIndicator(
-                      color: primaryColor,
-                    ),
-                  );
-          },
+            },
+          ),
         ),
       ),
     );
