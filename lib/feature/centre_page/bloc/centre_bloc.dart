@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sample_store/core/provider/remote/failure_response.dart';
 import 'package:sample_store/feature/news/provider/model/newa_model.dart';
 import 'package:sample_store/feature/news/provider/repo/news_repo.dart';
@@ -15,26 +14,27 @@ class CentreBloc extends Bloc<CentreEvent, CentreState> {
     init();
   }
 
-  late RefreshController refreshController = RefreshController(initialRefresh: false);
-
   init() async {
-    emit(CentreNewsLoaded(pageNumber: 1, news: await NewsRepo.instance.fetchModels(pageNumber: 1)));
+    add(CentreNewsLoadNext(
+      1
+    ));
+    // emit(CentreNewsLoaded(pageNumber: 1, news: await NewsRepo.instance.fetchModels(pageNumber: 1)));
   }
 
   ///listen tab changing
   @override
   Stream<CentreState> mapEventToState(CentreEvent event) async* {
     if (event is CentreNewsLoadPrevious) {
+      print(event);
       yield CentreNewsLoaded(
           pageNumber: event.pageNumber - 1,
           news: await NewsRepo.instance.fetchModels(pageNumber: event.pageNumber - 1));
-      refreshController.loadComplete();
 
     } else if (event is CentreNewsLoadNext) {
+      print('hhhhh');
       yield CentreNewsLoaded(
           pageNumber: event.pageNumber + 1,
           news: await NewsRepo.instance.fetchModels(pageNumber: event.pageNumber + 1));
-      refreshController.loadComplete();
 
     }
   }

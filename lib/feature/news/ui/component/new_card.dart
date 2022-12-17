@@ -21,11 +21,23 @@ class NewsCard extends StatelessWidget {
         children: [
           Expanded(
             flex: 1,
-            child: MyImage(
-              url: newsItem.image,
-              width: 130,
-              height: 94,
-              boarderRadius: 9,
+            child: Stack(
+              children: [
+                Positioned(child: MyImage(
+                  url: newsItem.image,
+                  width: 50,
+                  height: 50,
+                  boarderRadius: 9,
+                ),
+
+                bottom:0 ,),
+                MyImage(
+                  url: newsItem.image,
+                  width: 130,
+                  height: 94,
+                  boarderRadius: 9,
+                ),
+              ],
             ),
           ),
           const SizedBox(
