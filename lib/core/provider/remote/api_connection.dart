@@ -78,7 +78,7 @@ class APIConnection {
     return Response<Map<String, dynamic>>(requestOptions: RequestOptions(path: ''));
   }
 
-  Future<Response<Map<String, dynamic>>> post(String path, FormData body,
+  Future<Response<dynamic>> post(String path, FormData body,
       {String contentType = 'application/json',
       Map<String, String>? headers,
       Map<String, dynamic>? query,
@@ -89,10 +89,10 @@ class APIConnection {
 
       url = url.replaceAll('v1//', 'v1/');
 
-      Response<Map<String, dynamic>>? res;
+      Response<dynamic>? res;
       try {
         await _dio
-            .post<Map<String, dynamic>>(url,
+            .post<dynamic>(url,
                 data: body,
                 options: Options(
                   headers: headers,
@@ -102,23 +102,22 @@ class APIConnection {
                   },
                 ),
                 queryParameters: query)
-            .then((Response<Map<String, dynamic>> value) async {
-          res = value;
-          if (res!.data!['success'] == false) {
-            showDialog(
-              res!.data!['errors'] as Map<String, dynamic>,
-              url,
-              body,
-              contentType: contentType,
-              headers: headers!,
-              query: query,
-              isGet: false,
-            );
+            .then((Response<dynamic> value) async {
+              res =value;
+          if (res!.data is Map && (res!.data as Map).containsKey('success')) {
+            if (res!.data!['success'] == false) {
+              showDialog(
+                res!.data!['errors'] as Map<String, dynamic>,
+                url,
+                body,
+                contentType: contentType,
+                headers: headers!,
+                query: query,
+                isGet: false,
+              );
+            }
           }
-        }).timeout(const Duration(seconds: 15), onTimeout: () {
-          res = Response<Map<String, dynamic>>(
-              requestOptions: RequestOptions(
-                  data: <String, String>{'success': 'false', 'message': 'error'}, path: ''));
+          return res;
         });
       } catch (e) {
         return Response<Map<String, dynamic>>(

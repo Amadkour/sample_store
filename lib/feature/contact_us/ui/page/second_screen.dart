@@ -10,7 +10,7 @@ import 'package:sample_store/core/widget/text_field/design/child/symptoms_text_f
 import '../../../../core/global_bloc/app_bloc.dart';
 import '../../../../core/widget/my_button_not_progress.dart';
 import '../../../../core/widget/my_image.dart';
-import '../../../../core/widget/text_field/design/child/pationt_name_text_field.dart';
+import '../../../../core/widget/text_field/design/child/name_text_field.dart';
 import '../../../../core/widget/text_field/validator/child/image_field.dart';
 import '../../../../core/widget/text_field/validator/child/message_type.dart';
 import '../../bloc/contact_us_bloc.dart';

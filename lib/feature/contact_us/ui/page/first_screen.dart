@@ -10,7 +10,7 @@ import 'package:sample_store/feature/contact_us/ui/page/second_screen.dart';
 import '../../../../core/global_bloc/app_bloc.dart';
 import '../../../../core/widget/my_button_not_progress.dart';
 import '../../../../core/widget/my_image.dart';
-import '../../../../core/widget/text_field/design/child/pationt_name_text_field.dart';
+import '../../../../core/widget/text_field/design/child/name_text_field.dart';
 import '../../bloc/contact_us_bloc.dart';
 
 class ContactUsFirst extends StatelessWidget {

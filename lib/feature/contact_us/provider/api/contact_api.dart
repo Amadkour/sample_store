@@ -22,7 +22,7 @@ class ContactAPI {
     String? imageBase64,
   }) async {
     try {
-      Response response = await APIConnection.instance.post(
+      Response<dynamic> response = await APIConnection.instance.post(
           EndPoint.contactusPath,
           FormData.fromMap({
             "firstName": firstName,
@@ -34,12 +34,16 @@ class ContactAPI {
             "messageDesc": messageContent,
             // "attachment": imageBase64
           }));
+      print(response.statusCode);
       if (response.statusCode == 200) {
+        print(response.data);
         return Right(response);
       } else {
+        print(response.data);
+
         return Left(FailureResponse(
           statusCode: -1,
-          errorMessage: 'server error',
+          errorMessage: response.data,
         ));
       }
     } catch (e) {

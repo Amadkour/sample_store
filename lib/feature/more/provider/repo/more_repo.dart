@@ -70,7 +70,7 @@ class MoreRepo {
               ),
             ],
           ),
-          tab: tr('share_news'),
+          tab: 'share_news',
           color: Colors.green),
     ];
   }

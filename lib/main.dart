@@ -12,14 +12,15 @@ GlobalKey globalKey = GlobalKey();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting();
-  /// run normal app or network error
-    ///----------------lang must be not null
 
-    if (await readKey('lang') as String == '') {
-      await writeKey('lang', Platform.localeName.split('_').first);
-    }
-    lang=await readKey('lang');
-    runApp(const MyApp());
+  ///----------------lang must be not null
+  if (await readKey('lang') as String == '') {
+    await writeKey('lang', Platform.localeName.toLowerCase().contains('ar') ? 'ar_AE' : 'en_US');
+  }
+
+  ///read language
+  lang = await readKey('lang');
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

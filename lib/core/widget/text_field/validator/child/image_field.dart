@@ -12,27 +12,30 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey),
-        color: Colors.white,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Expanded(
-            child: Text(
-              file?.path??tr('upload_image')
+    return InkWell(
+      onTap: onChange,
+      child: Container(
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey),
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Expanded(
+              child: Text(
+                file?.path??tr('upload_image')
+              ),
             ),
+            IconButton(onPressed: onChange, icon: const Icon(
+              Icons.camera_alt_outlined,
+              color: primaryColor,
+            ))
+            ],
           ),
-          IconButton(onPressed: onChange, icon: const Icon(
-            Icons.camera_alt_outlined,
-            color: primaryColor,
-          ))
-          ],
         ),
       ),
     );
