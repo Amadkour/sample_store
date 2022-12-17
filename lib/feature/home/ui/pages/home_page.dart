@@ -54,12 +54,31 @@ class HomePage extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              MyImage(
-                                url: r.first.image,
-                                width: double.maxFinite,
+                              SizedBox(
                                 height: 200,
-                                boarderRadius: 10,
-                                fit: BoxFit.cover,
+                                width: double.maxFinite,
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      child:                              MyImage(
+                                        url: r.first.image,
+                                        width: double.maxFinite,
+                                        height: 200,
+                                        boarderRadius: 10,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const Positioned(child: MyImage(
+                                      url: 'assets/images/logo2.png',
+                                      width: 56,
+                                      height: 41,
+                                      fit: BoxFit.scaleDown,
+                                      boarderRadius: 9,
+                                    ),
+                                      bottom:-10 ,right: 0,),
+
+                                  ],
+                                ),
                               ),
                               AutoSizeText(
                                 (isArabic ? r.first.titleAr : r.first.titleEn) ?? '',

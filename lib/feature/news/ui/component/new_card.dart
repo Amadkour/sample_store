@@ -33,11 +33,12 @@ class NewsCard extends StatelessWidget {
                 ),
                 const Positioned(child: MyImage(
                   url: 'assets/images/logo2.png',
-                  width: 50,
-                  height: 50,
+                  width: 25,
+                  height: 35,
+                  fit: BoxFit.scaleDown,
                   boarderRadius: 9,
                 ),
-                bottom:0 ,right: 0,),
+                bottom:-10 ,right: 0,),
 
               ],
             ),
