@@ -39,17 +39,15 @@ class APIConnection {
   }
 
   static final APIConnection _instance = APIConnection._singleTone();
-  static APIConnection get instance => _instance;
 
+  static APIConnection get instance => _instance;
 
   Future<Response<dynamic>> get(String url,
       {Map<String, String>? headers, String? contentType, Map<String, dynamic>? query}) async {
     if (await checkConnection()) {
       try {
-        final Future<Response<dynamic>> r = _dio.get<dynamic>(
-            '${_dio.options.baseUrl}/$url',
-            options: Options(headers: headers, contentType: contentType),
-            queryParameters: query);
+        final Future<Response<dynamic>> r = _dio.get<dynamic>('${_dio.options.baseUrl}/$url',
+            options: Options(headers: headers, contentType: contentType), queryParameters: query);
         r.then((Response<dynamic> value) async {
           if (value.statusCode == 401) {
             showDialog(value.data, url, null,
@@ -88,13 +86,8 @@ class APIConnection {
     String url = '/$path';
     if (await checkConnection()) {
       url = url.startsWith('http') ? url : _dio.options.baseUrl + url;
-      // if(flavorConfig.name == flavorDev){
-      //   debugPrint('after:$url');
-      // }
+
       url = url.replaceAll('v1//', 'v1/');
-      // if(flavorConfig.name == flavorDev){
-      //   debugPrint('after:$url');
-      // }
 
       Response<Map<String, dynamic>>? res;
       try {

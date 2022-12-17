@@ -17,15 +17,15 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<AppBloc, AppState>(
+  builder: (context, state) {
     return BlocProvider(
       create: (context) => TabIndexBloc(),
       child: BlocBuilder<TabIndexBloc, TabIndexState>(
         builder: (context, state) {
           TabIndexBloc controller = context.read<TabIndexBloc>();
           return MainScaffold(
-            appBarWidget:state.footerTabIndex==4?
-            null:
-            Column(
+            appBarWidget:state.footerTabIndex!=4? Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -69,7 +69,7 @@ class DashboardPage extends StatelessWidget {
                 const SizedBox(height: 20,)
                 ,
               ],
-            ),
+            ):null,
             scaffold: PersistentTabView.custom(
               context,
               controller: TabIndexBloc.tabController,
@@ -132,5 +132,7 @@ class DashboardPage extends StatelessWidget {
         },
       ),
     );
+  },
+);
   }
 }

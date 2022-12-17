@@ -2,35 +2,35 @@ import 'package:flutter/material.dart';
 import '../../validator/child/empty_validation.dart';
 import '../parent/parent.dart';
 
-class SymptomsTextField extends StatelessWidget {
-  final TextEditingController nameController;
-  String nameControllerError;
+class ContentTextField extends StatelessWidget {
+  final TextEditingController contentController;
+  late String? contentControllerError;
   final FocusNode focusNode;
 
-  SymptomsTextField(
+   ContentTextField(
       {Key? key,
-      required this.nameController,
+      required this.contentController,
       required this.focusNode,
-      required this.nameControllerError}) : super(key: key);
+      this.contentControllerError})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  ParentTextField(
-        onchange:(val) {
-          nameControllerError = '';
-        },
+    return ParentTextField(
+      onchange: (val) {
+        contentControllerError = '';
+      },
       custom: true,
-        controller: nameController,
-        keyboardType: TextInputType.name,
-        name: '',
-       validator: EmptyValidator().getValidationWithParameter('name_empty'),
-        focusNode: focusNode,
+      controller: contentController,
+      keyboardType: TextInputType.name,
+      name: '',
+      validator: EmptyValidator().getValidationWithParameter('name_empty'),
+      focusNode: focusNode,
       multiLine: 4,
-        title: '',
-        error: nameControllerError,
+      title: '',
+      error: contentControllerError,
       border: 4,
       fillColor: Colors.white,
-
     );
   }
 }

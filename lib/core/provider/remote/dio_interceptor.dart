@@ -12,6 +12,7 @@ class DioInterceptor extends Interceptor {
   @override
   Future<dynamic> onError(DioError err, ErrorInterceptorHandler handler) async {
     final DioErrorType errorType = err.type;
+
     if (errorType == DioErrorType.sendTimeout ||
         errorType == DioErrorType.receiveTimeout ||
         errorType == DioErrorType.connectTimeout) {
@@ -19,16 +20,13 @@ class DioInterceptor extends Interceptor {
     } else {
       await _handleDialogError(err);
     }
-    // return handler.reject(error);
+    return handler.reject(err);
   }
 
   @override
   Future<dynamic> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    print(options.path);
     options.headers = <String, String>{
-      // 'Accept-Language': sharedPrefs.getString('lang')!,
       'Accept': 'application/json',
-      // 'Content-type':'application/json'
     };
     return handler.next(options);
   }

@@ -5,6 +5,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sample_store/core/widget/base_page.dart';
 import 'package:sample_store/core/widget/text_field/design/child/email_text_field.dart';
 import 'package:sample_store/core/widget/text_field/design/child/phone_text_field.dart';
+import 'package:sample_store/feature/contact_us/ui/page/second_screen.dart';
 
 import '../../../../core/global_bloc/app_bloc.dart';
 import '../../../../core/widget/my_button_not_progress.dart';
@@ -21,8 +22,8 @@ class ContactUsFirst extends StatelessWidget {
         scaffold: Container(
           padding: const EdgeInsets.all(30),
           color: Colors.white,
-          child: BlocProvider(
-            create: (context) => ContactUsBloc(),
+          child: BlocProvider.value(
+            value:ContactUsBloc(),
             child: BlocBuilder<ContactUsBloc, ContactUsState>(
               builder: (context, state) {
                 ContactUsBloc controller = context.read<ContactUsBloc>();
@@ -61,7 +62,13 @@ class ContactUsFirst extends StatelessWidget {
                       const SizedBox(height: 20,),
                       MyButtonNotProgress(onPressed: () {
 
-                        pushNewScreen(context, screen: ContactUsFirst(),withNavBar: false);
+                        pushNewScreen(context, screen: ContactUsSecond(
+                          firstName: controller.firstController.text,
+                          lastName: controller.secondController.text,
+                          email: controller.emailController.text,
+                          phone: controller.phoneController.text,
+
+                        ),withNavBar: false);
                       }, text: 'Continue',
 
                       )

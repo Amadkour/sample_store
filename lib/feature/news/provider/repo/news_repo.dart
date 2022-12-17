@@ -17,7 +17,7 @@ class NewsRepo {
     try {
       ///api
       Either<FailureResponse, SuccessResponse> responseData =
-          await NewsApi.instance.fetchNews(pageNumber: pageNumber,limit: 1);
+          await NewsApi.instance.fetchNews(pageNumber: pageNumber,limit: limit);
 
       ///response
       return responseData.fold((l) => Left(l), (r) {

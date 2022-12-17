@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sample_store/feature/news/presentation/component/new_card.dart';
 import 'package:sample_store/feature/news/provider/model/newa_model.dart';
 
 import '../component/new_card.dart';

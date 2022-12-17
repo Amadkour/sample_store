@@ -11,23 +11,24 @@ part 'app_state.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc() : super(AppInitial()) {
     on<AppEvent>((event, emit) {
-      // TODO: implement event handler
+      if (event is LanguageChange) {
+        emit(LanguageChanged());
+      }
     });
   }
 
-
-
-  /// also can use this file to config font size and theme in all app screens
+  ///language
+  loadLanguage(String l) async {
+    lang = l;
+    String translation;
+    translation = await rootBundle.loadString('assets/localization/$lang.json');
+    localization = jsonDecode(translation);
+    add(LanguageChange());
+  }
 }
 
 String tr(String key) => localization[key] ?? key;
 Map localization = {};
 String lang = 'ar_AE';
-///language
-loadLanguage(String l) async {
-  lang = l;
-  String translation;
-  translation = await rootBundle.loadString('assets/localization/$lang.json');
-  localization = jsonDecode(translation);
-}
+
 bool get isArabic => lang == 'ar_AE';

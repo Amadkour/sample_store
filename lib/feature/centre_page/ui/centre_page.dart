@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sample_store/core/res/theme/colors.dart';
-import 'package:sample_store/feature/home/bloc/home_bloc.dart';
-import 'package:sample_store/feature/news/presentation/page/news_view.dart';
+import '../../news/ui/page/news_view.dart';
 import '../bloc/centre_bloc.dart';
 
 class CentrePage extends StatelessWidget {
@@ -42,12 +41,9 @@ class CentrePage extends StatelessWidget {
                         },
                       ),
                       onRefresh: () {
-                        print('object');
                         controller.add(CentreNewsLoadNext(state.pageNumber));
                       },
                       onLoading: () {
-                        print('object');
-
                         controller.add(CentreNewsLoadPrevious(state.pageNumber));
                       },
                       child: NewsView(r));

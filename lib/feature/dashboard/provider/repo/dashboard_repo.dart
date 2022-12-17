@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sample_store/feature/centre_page/ui/centre_page.dart';
 import 'package:sample_store/feature/home/ui/pages/home_page.dart';
 import '../../../../core/global_bloc/app_bloc.dart';
@@ -46,7 +45,7 @@ class DashboardRepo {
         tab: 'statistics',
       ),
       DashboardFooterTabModel(
-        content: MorePage(),
+        content: const MorePage(),
         tab: tr('more'),
       ),
     ];

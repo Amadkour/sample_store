@@ -6,11 +6,16 @@ import '../parent/parent_validator.dart';
   String? Function(String?)? getValidation() {
     return qValidator(
       [
+        StartsWith('05'),
         IsRequired(
           errorMessage('phone_empty'),
         ),
         MinLength(
-          9,
+          10,
+          errorMessage('phone_greater'),
+        ),
+        MaxLength(
+          10,
           errorMessage('phone_greater'),
         ),
       ],

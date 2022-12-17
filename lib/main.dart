@@ -10,7 +10,6 @@ GlobalKey globalKey = GlobalKey();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeDateFormatting();
-  loadLanguage(lang);
   runApp(const MyApp());
 }
 
@@ -22,12 +21,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => AppBloc(),
-      child: MaterialApp(
-        key: globalKey,
-        debugShowCheckedModeBanner: false,
-        home: const DashboardPage(),
-        locale: Locale(lang),
-        theme: lightTheme,
+      child: BlocBuilder<AppBloc, AppState>(
+        builder: (context, state) {
+          context.read<AppBloc>().loadLanguage(lang);
+          return MaterialApp(
+            key: globalKey,
+            debugShowCheckedModeBanner: false,
+            home: const DashboardPage(),
+            locale: Locale(lang),
+            theme: lightTheme,
+          );
+        },
       ),
     );
   }

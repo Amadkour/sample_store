@@ -24,7 +24,6 @@ class CentreBloc extends Bloc<CentreEvent, CentreState> {
   ///listen tab changing
   @override
   Stream<CentreState> mapEventToState(CentreEvent event) async* {
-    print('kmkkm');
     if (event is CentreNewsLoadPrevious) {
       yield CentreNewsLoaded(
           pageNumber: event.pageNumber - 1,
