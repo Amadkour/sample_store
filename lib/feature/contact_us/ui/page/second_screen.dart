@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sample_store/core/widget/base_page.dart';
 import 'package:sample_store/core/widget/text_field/design/child/email_text_field.dart';
@@ -40,65 +41,70 @@ class ContactUsSecond extends StatelessWidget {
             child: BlocBuilder<ContactUsBloc, ContactUsState>(
               builder: (context, state) {
                 ContactUsBloc controller = context.read<ContactUsBloc>();
-                return Form(
-                  key: keyValidation,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        tr('contact_us_screen'),
-                        style: const TextStyle(color: Color(0xff0F1737), fontSize: 22),
+                return KeyboardActions(
+                  config: controller.buildConfig2(context),
+                  child:Form(
+                    key: keyValidation,
+                    child: SingleChildScrollView(
+                      child:Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            tr('contact_us_screen'),
+                            style: const TextStyle(color: Color(0xff0F1737), fontSize: 22),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          NameTextField(
+                            nameController: controller.messageAddressController,
+                            focusNode: controller.messageAddressFocus,
+                            hint: 'message_title',
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          MessageType(
+                            items: controller.messageTypes,
+                            selectedItem: controller.messageType,
+                            onChange: controller.onChangeType,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ContentTextField(
+                            contentController: controller.messageContentController,
+                            focusNode: controller.messageContentFocus,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ImageWidget(
+                            file: controller.image,
+                            onChange: controller.onChangeImage,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          state is MessageSending
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : MyButtonNotProgress(
+                                  onPressed: () async {
+                                    if (keyValidation.currentState!.validate()) {
+                                      await controller.onConfirm(context,
+                                          firstName: firstName,
+                                          lastName: lastName,
+                                          email: email,
+                                          phone: phone);
+                                    }
+                                  },
+                                  text: tr('send'),
+                                )
+                        ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      NameTextField(
-                        nameController: controller.messageAddressController,
-                        focusNode: controller.messageAddressFocus,
-                        hint: 'message_title',
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      MessageType(
-                        items: controller.messageTypes,
-                        selectedItem: controller.messageType,
-                        onChange: controller.onChangeType,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ContentTextField(
-                        contentController: controller.messageContentController,
-                        focusNode: controller.messageContentFocus,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ImageWidget(
-                        file: controller.image,
-                        onChange: controller.onChangeImage,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      state is MessageSending
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : MyButtonNotProgress(
-                              onPressed: () async {
-                                if (keyValidation.currentState!.validate()) {
-                                  await controller.onConfirm(context,
-                                      firstName: firstName,
-                                      lastName: lastName,
-                                      email: email,
-                                      phone: phone);
-                                }
-                              },
-                              text: tr('send'),
-                            )
-                    ],
+                    ),
                   ),
                 );
               },

@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:keyboard_actions/keyboard_actions_config.dart';
+import 'package:keyboard_actions/keyboard_actions_item.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:sample_store/core/widget/message.dart';
 import 'package:sample_store/feature/contact_us/provider/repo/contact_repo.dart';
@@ -37,8 +41,7 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
     add(ImageChange());
   }
 
-  Future<void> onConfirm(
-    context, {
+  Future<void> onConfirm(context, {
     required String firstName,
     required String lastName,
     required String email,
@@ -56,8 +59,8 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
       imageBase64: image == null
           ? null
           : base64Encode(
-              await image!.readAsBytes(),
-            ),
+        await image!.readAsBytes(),
+      ),
     ))
         .fold((l) {
       add(MessageConfirm());
@@ -94,4 +97,61 @@ class ContactUsBloc extends Bloc<ContactUsEvent, ContactUsState> {
       }
     });
   }
-}
+
+  KeyboardActionsConfig buildConfig1(BuildContext context) {
+    return KeyboardActionsConfig(
+      defaultDoneWidget: const AutoSizeText(
+        'Done',
+        minFontSize: 9,
+        maxFontSize: 14,
+        style: TextStyle(
+          fontSize: 14,
+          color: Colors.black
+        ),
+      ),
+        keyboardBarColor: Colors.grey[200],
+        actions:
+
+        ///-----------------keyboard config -----> [by phone]
+        <KeyboardActionsItem>[
+          KeyboardActionsItem(
+            focusNode: firstFocus,
+          ),
+          KeyboardActionsItem(
+            focusNode: secondFocus,
+          ),
+          KeyboardActionsItem(
+            focusNode: emailFocus,
+          ),
+          KeyboardActionsItem(
+            focusNode: phoneFocus,
+          ),
+        ]
+    );
+  }
+  KeyboardActionsConfig buildConfig2(BuildContext context) {
+    return KeyboardActionsConfig(
+      defaultDoneWidget: const AutoSizeText(
+        'Done',
+        minFontSize: 9,
+        maxFontSize: 14,
+        style: TextStyle(
+          fontSize: 14,
+          color: Colors.black
+        ),
+      ),
+        keyboardBarColor: Colors.grey[200],
+        actions:
+
+        ///-----------------keyboard config -----> [by phone]
+        <KeyboardActionsItem>[
+          KeyboardActionsItem(
+            focusNode: messageAddressFocus,
+          ),
+          KeyboardActionsItem(
+            focusNode: messageContentFocus,
+          ),
+        ]
+    );
+  }
+  }

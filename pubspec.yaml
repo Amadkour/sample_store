@@ -29,6 +29,7 @@ dependencies:
   queen_validators:
   image_picker: ^0.8.6
   shared_preferences:
+  keyboard_actions: ^4.0.0
 
 
 dev_dependencies:
